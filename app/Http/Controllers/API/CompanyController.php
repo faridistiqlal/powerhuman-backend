@@ -55,7 +55,6 @@ class CompanyController extends Controller
             $company = Company::create([
                 'name' => $request->name,
                 'logo' => $path,
-
             ]);
             if (!$company) {
                 throw new Exception('Company gagal dibuat');
@@ -87,7 +86,7 @@ class CompanyController extends Controller
             $company->update(
                 [
                     'name' => $request->name,
-                    'logo' => $path,
+                    'logo' => isset($path) ? $path : $company->icon,
                 ]
             );
             return ResponseFormatter::success($company, 'Data Berhasil Diubah');
